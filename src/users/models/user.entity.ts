@@ -10,10 +10,10 @@ export class User extends Document {
   @Prop({ isRequired: true })
   birthday: Date;
 
-  @Prop({ isRequired: true })
+  @Prop({ isRequired: true, unique: true })
   email: string;
 
-  @Prop({ isRequired: true })
+  @Prop({ isRequired: true, unique: true })
   username: string;
 
   @Prop({ isRequired: true })

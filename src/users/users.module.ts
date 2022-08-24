@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
+import { JwtService } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/auth/auth.module';
 import { AuthRepository } from 'src/auth/repositories/auth.repository';
@@ -23,6 +24,7 @@ import { UsersRepository } from './repositories/users.repository';
     GetUsersQueryHandler,
     AuthRepository,
     UpdateCommandHandler,
+    JwtService,
   ],
 })
 export class UsersModule {}
