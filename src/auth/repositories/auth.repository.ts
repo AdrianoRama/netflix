@@ -22,7 +22,12 @@ export class AuthRepository {
 
   async signUp(createUserDto: CreateUserDto) {
     createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
-    await this.model.create({ ...createUserDto, role: Role.USER });
+
+    return await this.model.create({
+      ...createUserDto,
+      role: Role.USER,
+      subUsers: [],
+    });
   }
 
   async validate(signInDto: SignInDto) {
@@ -31,9 +36,12 @@ export class AuthRepository {
 
     if (!found)
       throw new HttpException('Wrong credentials!', HttpStatus.UNAUTHORIZED);
+
     const passMatch = await bcrypt.compare(password, found.password);
+
     if (!passMatch)
       throw new HttpException('Wrong credentials!', HttpStatus.UNAUTHORIZED);
+
     found.password = undefined;
     return found;
   }
@@ -44,7 +52,6 @@ export class AuthRepository {
       { _id: user._id, username: user.username, role: user.role },
       { secret: 'secret' },
     );
-
     return { token, user };
   }
 }
