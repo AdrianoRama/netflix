@@ -27,17 +27,17 @@ export class UsersRepository {
   }
 
   async deleteOne(id: string) {
-    return this.model.findOneAndDelete({ _id: id });
+    return await this.model.findOneAndDelete({ _id: id });
   }
 
   async updateOne(id: string, updateUserDto: UpdateUserDto) {
-    const updateInfo = {};
+    // const updateInfo = {};
 
-    for (const key in updateUserDto) {
-      updateInfo[key] = updateUserDto[key];
-    }
+    // for (const key in updateUserDto) {
+    //   updateInfo[key] = updateUserDto[key];
+    // }
 
-    return await this.model.findOneAndUpdate({ _id: id }, updateInfo, {
+    return await this.model.findOneAndUpdate({ _id: id }, updateUserDto, {
       new: true,
     });
   }

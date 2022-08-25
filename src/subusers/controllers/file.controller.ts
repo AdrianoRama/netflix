@@ -1,12 +1,14 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get, Param, Res } from '@nestjs/common';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 
-@Controller('file')
+@Controller('images')
 export class FileController {
-  @Get()
-  getFile(@Res() res: any) {
-    const file = createReadStream(join(process.cwd(), 'defaultUser.jpg'));
+  @Get('/:image')
+  getFile(@Res() res: any, @Param('image') image: string) {
+    const file = createReadStream(
+      join(process.cwd() + '/src/subusers/images/', image),
+    );
     file.pipe(res);
   }
 }

@@ -1,5 +1,17 @@
-import { Body, Controller, Get, Param, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Put,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { JwtService } from '@nestjs/jwt';
+import { JwtGuard } from 'src/auth/guard/jwt.guard';
+import { DeleteUserCommand } from '../commands/impl/delete-user.command';
 import { UpdateCommand } from '../commands/impl/update.command';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { GetUserQuery } from '../queries/impl/get-user.query';
@@ -22,8 +34,17 @@ export class UsersController {
     return this.queryBus.execute(new GetUserQuery(id));
   }
 
-  @Put('/:id')
-  updateOne(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.commandBus.execute(new UpdateCommand(id, updateUserDto));
+  @Put()
+  @UseGuards(JwtGuard)
+  updateOne(@Req() req: any, @Body() updateUserDto: UpdateUserDto) {
+    return this.commandBus.execute(
+      new UpdateCommand(req.user._id, updateUserDto),
+    );
+  }
+
+  @Delete()
+  @UseGuards(JwtGuard)
+  deleteOne(@Req() req: any) {
+    return this.commandBus.execute(new DeleteUserCommand(req.user._id));
   }
 }
