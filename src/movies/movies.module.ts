@@ -14,6 +14,7 @@ import { MoviesController } from './controllers/movies.controller';
 import { Movie, MovieSchema } from './models/movie.entity';
 import { GetAllQueryHandler } from './queries/handlers/get-all-query.handler';
 import { GetOneQueryHandler } from './queries/handlers/get-one-query.handler';
+import { GetTopRatedQueryHandler } from './queries/handlers/get-topRated-query.handler';
 import { MoviesRepository } from './repositories/movies.repository';
 
 @Module({
@@ -35,6 +36,7 @@ import { MoviesRepository } from './repositories/movies.repository';
     RateMovieCommandHandler,
     RatedMoviesEventHandler,
     UsersRepository,
+    GetTopRatedQueryHandler,
   ],
 })
 export class MoviesModule {}
