@@ -9,7 +9,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { JwtService } from '@nestjs/jwt';
 import { JwtGuard } from 'src/auth/guard/jwt.guard';
 import { DeleteUserCommand } from '../commands/impl/delete-user.command';
 import { UpdateCommand } from '../commands/impl/update.command';

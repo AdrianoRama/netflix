@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateMovieDto } from '../dtos/create-movie.dto';
+import { RateMovieDto } from '../dtos/rate-movie.dto';
 import { UpdateMovieDto } from '../dtos/update-movie.dto';
 import { Movie } from '../models/movie.entity';
 
@@ -14,8 +15,6 @@ export class MoviesRepository {
   }
 
   async getAll(page: number) {
-    console.log(page);
-
     return await this.model
       .find()
       .skip((page - 1) * 12)
@@ -41,4 +40,35 @@ export class MoviesRepository {
       new: true,
     });
   }
+  async rateMovie(userId: string, id: string, rateMovieDto: RateMovieDto) {
+    const movie = await this.getOne(id);
+
+    const found = movie.userRatings.find((rating) => rating.userId === userId);
+
+    if (found) {
+      found.rating = rateMovieDto.rating;
+      return await this.model.updateOne(
+        { _id: movie.id },
+        { userRatings: movie.userRatings },
+        { new: true },
+      );
+    }
+
+    return await this.model.updateOne(
+      { _id: movie._id },
+      { $push: { userRatings: { userId, rating: rateMovieDto.rating } } },
+      { new: true },
+    );
+  }
+
+  // async getTopRated() {
+  //   const movies = await this.model.find();
+
+  //   movies.map((movie) => {
+  //     let top = 0;
+  //     for (const rating of movie.userRatings) {
+  //       top += rating.rating;
+  //     }
+  //   });
+  // }
 }

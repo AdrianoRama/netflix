@@ -41,4 +41,30 @@ export class UsersRepository {
       new: true,
     });
   }
+
+  async userRatedMovie(
+    userId: string,
+    id: string,
+    title: string,
+    rating: number,
+  ) {
+    const user = await this.getOne(userId);
+    const found = user.ratedMovies.find((movie) => movie.id === id);
+
+    console.log('event');
+
+    if (found) {
+      found.rating = rating;
+      return await this.model.updateOne(
+        { _id: user.id },
+        { ratedMovies: user.ratedMovies },
+        { new: true },
+      );
+    } else
+      return await this.model.updateOne(
+        { _id: userId },
+        { $push: { ratedMovies: { id, title, rating } } },
+        { new: true },
+      );
+  }
 }

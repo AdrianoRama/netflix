@@ -25,7 +25,7 @@ export class Movie extends Document {
   poster: string;
 
   @Prop()
-  userRatings: number[];
+  userRatings: { userId: string; rating: number }[];
 
   @Prop()
   contentRating: ContentRating;
@@ -41,6 +41,9 @@ export class Movie extends Document {
 
   @Prop()
   duration: number;
+
+  @Prop()
+  averageUserRating: number;
 }
 
 export enum MediaType {

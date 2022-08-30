@@ -10,6 +10,7 @@ import { DeleteUserCommandHandler } from './commands/handlers/delete-user-comman
 import { UpdateCommandHandler } from './commands/handlers/update-command.handler';
 import { UsersController } from './controllers/users.controller';
 import { DeleteSubusersEventHandler } from './events/handler/delete-subusers-event.handler';
+import { RatedMoviesEventHandler } from './events/handler/rated-movies.event';
 import { User, UserSchema } from './models/user.entity';
 import { GetUserQueryHandler } from './queries/handlers/get-user-query.handler';
 import { GetUsersQueryHandler } from './queries/handlers/get-users-query.handler';

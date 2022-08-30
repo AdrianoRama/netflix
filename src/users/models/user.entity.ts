@@ -31,6 +31,9 @@ export class User extends Document {
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Subuser.name }] })
   subusers: Subuser[];
+
+  @Prop()
+  ratedMovies: [{ id: string; title: string; rating: number }];
 }
 
 export enum Plan {
