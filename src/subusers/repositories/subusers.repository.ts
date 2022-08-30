@@ -63,8 +63,6 @@ export class SubusersRepository {
     id: string,
     updateSubuserDto: UpdateSubuserDto,
   ) {
-    console.log(updateSubuserDto);
-
     return await this.model.findOneAndUpdate(
       { userId, _id: id },
       updateSubuserDto,

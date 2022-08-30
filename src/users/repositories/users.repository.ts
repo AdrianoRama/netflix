@@ -51,8 +51,6 @@ export class UsersRepository {
     const user = await this.getOne(userId);
     const found = user.ratedMovies.find((movie) => movie.id === id);
 
-    console.log('event');
-
     if (found) {
       found.rating = rating;
       return await this.model.updateOne(
