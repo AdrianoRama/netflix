@@ -74,11 +74,21 @@ export class MoviesRepository {
     );
   }
 
-  async getTopRated() {
-    const movies = await this.model
+  async getTopRated(page: number) {
+    return await this.model
       .find()
       .sort({ averageUserRating: -1 })
-      .limit(20);
-    return movies;
+      .skip((page - 1) * 12)
+      .limit(12);
+  }
+
+  async getLatest(page: number) {
+    console.log(page);
+
+    return await this.model
+      .find()
+      .sort({ released: -1 })
+      .skip((page - 1) * 12)
+      .limit(12);
   }
 }

@@ -8,7 +8,7 @@ export class GetTopRatedQueryHandler
 {
   constructor(private readonly moviesRepository: MoviesRepository) {}
 
-  async execute(): Promise<any> {
-    return this.moviesRepository.getTopRated();
+  async execute(query: GetTopRatedQuery): Promise<any> {
+    return this.moviesRepository.getTopRated(query.page);
   }
 }

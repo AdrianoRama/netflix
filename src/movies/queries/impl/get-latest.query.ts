@@ -1,3 +1,3 @@
-export class GetTopRatedQuery {
+export class GetLatestQuery {
   constructor(public readonly page: number) {}
 }

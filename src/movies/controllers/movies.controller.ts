@@ -20,6 +20,7 @@ import { CreateMovieDto } from '../dtos/create-movie.dto';
 import { RateMovieDto } from '../dtos/rate-movie.dto';
 import { UpdateMovieDto } from '../dtos/update-movie.dto';
 import { GetAllQuery } from '../queries/impl/get-all.query';
+import { GetLatestQuery } from '../queries/impl/get-latest.query';
 import { GetOneQuery } from '../queries/impl/get-one.query';
 import { GetTopRatedQuery } from '../queries/impl/get-topRated.query';
 
@@ -47,8 +48,13 @@ export class MoviesController {
   }
 
   @Get('/toprated')
-  getAllRated() {
-    return this.queryBus.execute(new GetTopRatedQuery());
+  getAllRated(@Query('page') page: number) {
+    return this.queryBus.execute(new GetTopRatedQuery(+page));
+  }
+
+  @Get('/latest')
+  getLatest(@Query('page') page: number) {
+    return this.queryBus.execute(new GetLatestQuery(+page));
   }
 
   @Get('/:id')

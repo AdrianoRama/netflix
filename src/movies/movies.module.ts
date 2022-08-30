@@ -13,6 +13,7 @@ import { UpdateMovieCommandHandler } from './commands/handlers/update-movie-comm
 import { MoviesController } from './controllers/movies.controller';
 import { Movie, MovieSchema } from './models/movie.entity';
 import { GetAllQueryHandler } from './queries/handlers/get-all-query.handler';
+import { GetLatestQueryHandler } from './queries/handlers/get-latest-query.handler';
 import { GetOneQueryHandler } from './queries/handlers/get-one-query.handler';
 import { GetTopRatedQueryHandler } from './queries/handlers/get-topRated-query.handler';
 import { MoviesRepository } from './repositories/movies.repository';
@@ -37,6 +38,7 @@ import { MoviesRepository } from './repositories/movies.repository';
     RatedMoviesEventHandler,
     UsersRepository,
     GetTopRatedQueryHandler,
+    GetLatestQueryHandler,
   ],
 })
 export class MoviesModule {}
