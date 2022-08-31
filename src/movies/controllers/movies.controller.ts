@@ -76,7 +76,7 @@ export class MoviesController {
     @Body() rateMovieDto: RateMovieDto,
   ) {
     return this.commandBus.execute(
-      new RateMovieCommand(req.user._id, id, rateMovieDto.title, rateMovieDto),
+      new RateMovieCommand(req.user._id, id, rateMovieDto),
     );
   }
 

@@ -10,7 +10,6 @@ export class RatedMoviesEventHandler implements IEventHandler<RatedMovieEvent> {
     return this.usersRepository.userRatedMovie(
       event.userId,
       event.id,
-      event.title,
       event.rating,
     );
   }

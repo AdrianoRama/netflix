@@ -17,7 +17,6 @@ export class RateMovieCommandHandler
       new RatedMovieEvent(
         command.userId,
         command.id,
-        command.title,
         command.rateMovieDto.rating,
       ),
     );

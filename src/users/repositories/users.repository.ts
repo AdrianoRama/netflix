@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UpdateUserDto } from '../dtos/update-user.dto';
@@ -42,12 +42,7 @@ export class UsersRepository {
     });
   }
 
-  async userRatedMovie(
-    userId: string,
-    id: string,
-    title: string,
-    rating: number,
-  ) {
+  async userRatedMovie(userId: string, id: string, rating: number) {
     const user = await this.getOne(userId);
     const found = user.watchedMovies.find((movie) => movie.id === id);
 
@@ -58,12 +53,7 @@ export class UsersRepository {
         { watchedMovies: user.watchedMovies },
         { new: true },
       );
-    } else
-      return await this.model.updateOne(
-        { _id: userId },
-        { $push: { watchedMovies: { id, title, rating } } },
-        { new: true },
-      );
+    } else throw new Error('Can not rate movie without watching it');
   }
 
   async watchMovie(userId: string, id: string, title: string) {

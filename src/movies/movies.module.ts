@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/auth/auth.module';
-import { RatedMoviesEventHandler } from 'src/users/events/handler/rated-movies.event';
+import { RatedMoviesEventHandler } from 'src/users/events/handler/rated-movies-event.handler';
 import { WatchMovieEventHandler } from 'src/users/events/handler/watch-movie-event.handler';
 import { User, UserSchema } from 'src/users/models/user.entity';
 import { UsersRepository } from 'src/users/repositories/users.repository';
