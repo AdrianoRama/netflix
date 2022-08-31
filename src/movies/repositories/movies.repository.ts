@@ -87,8 +87,6 @@ export class MoviesRepository {
   }
 
   async getLatest(page: number) {
-    console.log(page);
-
     return await this.model
       .find()
       .sort({ released: -1 })

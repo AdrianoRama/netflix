@@ -3,6 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/auth/auth.module';
 import { RatedMoviesEventHandler } from 'src/users/events/handler/rated-movies.event';
+import { WatchMovieEventHandler } from 'src/users/events/handler/watch-movie-event.handler';
 import { User, UserSchema } from 'src/users/models/user.entity';
 import { UsersRepository } from 'src/users/repositories/users.repository';
 import { UsersModule } from 'src/users/users.module';
@@ -41,6 +42,7 @@ import { MoviesRepository } from './repositories/movies.repository';
     GetTopRatedQueryHandler,
     GetLatestQueryHandler,
     UpdateViewsCommandHandler,
+    WatchMovieEventHandler,
   ],
 })
 export class MoviesModule {}

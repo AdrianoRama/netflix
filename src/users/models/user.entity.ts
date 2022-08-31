@@ -33,7 +33,9 @@ export class User extends Document {
   subusers: Subuser[];
 
   @Prop()
-  ratedMovies: [{ id: string; title: string; rating: number }];
+  watchedMovies: [
+    { id: string; title: string; rating?: number; views: number },
+  ];
 }
 
 export enum Plan {

@@ -49,19 +49,38 @@ export class UsersRepository {
     rating: number,
   ) {
     const user = await this.getOne(userId);
-    const found = user.ratedMovies.find((movie) => movie.id === id);
+    const found = user.watchedMovies.find((movie) => movie.id === id);
 
     if (found) {
       found.rating = rating;
       return await this.model.updateOne(
         { _id: user.id },
-        { ratedMovies: user.ratedMovies },
+        { watchedMovies: user.watchedMovies },
         { new: true },
       );
     } else
       return await this.model.updateOne(
         { _id: userId },
-        { $push: { ratedMovies: { id, title, rating } } },
+        { $push: { watchedMovies: { id, title, rating } } },
+        { new: true },
+      );
+  }
+
+  async watchMovie(userId: string, id: string, title: string) {
+    const user = await this.getOne(userId);
+    const found = user.watchedMovies.find((movie) => movie.id === id);
+
+    if (found) {
+      found.views++;
+      return await this.model.updateOne(
+        { _id: userId },
+        { watchedMovies: user.watchedMovies },
+        { new: true },
+      );
+    } else
+      return await this.model.updateOne(
+        { _id: userId },
+        { $push: { watchedMovies: { id, title, views: 1 } } },
         { new: true },
       );
   }

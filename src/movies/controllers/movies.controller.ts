@@ -81,7 +81,14 @@ export class MoviesController {
   }
 
   @Put('/views/:id')
-  updateViews(@Param('id') id: string) {
-    return this.commandBus.execute(new UpdateViewsCommand(id));
+  @UseGuards(JwtGuard)
+  updateViews(
+    @Param('id') id: string,
+    @Req() req: any,
+    @Body('title') title: string,
+  ) {
+    return this.commandBus.execute(
+      new UpdateViewsCommand(req.user._id, id, title),
+    );
   }
 }
