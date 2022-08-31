@@ -16,6 +16,7 @@ import { CreateMovieCommand } from '../commands/impl/create-movie.command';
 import { DeleteMovieCommand } from '../commands/impl/delete-movie.command';
 import { RateMovieCommand } from '../commands/impl/rate-movie.command';
 import { UpdateMovieCommand } from '../commands/impl/update-movie.command';
+import { UpdateViewsCommand } from '../commands/impl/update-views.command';
 import { CreateMovieDto } from '../dtos/create-movie.dto';
 import { RateMovieDto } from '../dtos/rate-movie.dto';
 import { UpdateMovieDto } from '../dtos/update-movie.dto';
@@ -77,5 +78,10 @@ export class MoviesController {
     return this.commandBus.execute(
       new RateMovieCommand(req.user._id, id, rateMovieDto.title, rateMovieDto),
     );
+  }
+
+  @Put('/views/:id')
+  updateViews(@Param('id') id: string) {
+    return this.commandBus.execute(new UpdateViewsCommand(id));
   }
 }

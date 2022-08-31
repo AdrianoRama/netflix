@@ -11,7 +11,11 @@ export class MoviesRepository {
   constructor(@InjectModel(Movie.name) private readonly model: Model<Movie>) {}
 
   async create(createMovieDto: CreateMovieDto) {
-    return await this.model.create({ ...createMovieDto, averageUserRating: 0 });
+    return await this.model.create({
+      ...createMovieDto,
+      averageUserRating: 0,
+      views: 0,
+    });
   }
 
   async getAll(page: number) {
@@ -90,5 +94,13 @@ export class MoviesRepository {
       .sort({ released: -1 })
       .skip((page - 1) * 12)
       .limit(12);
+  }
+
+  async updateViews(id: string) {
+    return await this.model.updateOne(
+      { _id: id },
+      { $inc: { views: +1 } },
+      { new: true },
+    );
   }
 }

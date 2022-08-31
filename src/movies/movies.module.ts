@@ -10,6 +10,7 @@ import { CreateMovieCommandHandler } from './commands/handlers/create-movie-comm
 import { DeleteMovieCommandHandler } from './commands/handlers/delete-movie-command.handler';
 import { RateMovieCommandHandler } from './commands/handlers/rate-movie-command.handler';
 import { UpdateMovieCommandHandler } from './commands/handlers/update-movie-command.handler';
+import { UpdateViewsCommandHandler } from './commands/handlers/update-views-command.handler';
 import { MoviesController } from './controllers/movies.controller';
 import { Movie, MovieSchema } from './models/movie.entity';
 import { GetAllQueryHandler } from './queries/handlers/get-all-query.handler';
@@ -39,6 +40,7 @@ import { MoviesRepository } from './repositories/movies.repository';
     UsersRepository,
     GetTopRatedQueryHandler,
     GetLatestQueryHandler,
+    UpdateViewsCommandHandler,
   ],
 })
 export class MoviesModule {}

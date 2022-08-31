@@ -44,6 +44,9 @@ export class Movie extends Document {
 
   @Prop()
   averageUserRating: number;
+
+  @Prop()
+  views: number;
 }
 
 export enum MediaType {
