@@ -23,6 +23,7 @@ import { UpdateMovieDto } from '../dtos/update-movie.dto';
 import { GetAllQuery } from '../queries/impl/get-all.query';
 import { GetLatestQuery } from '../queries/impl/get-latest.query';
 import { GetOneQuery } from '../queries/impl/get-one.query';
+import { GetPopularQuery } from '../queries/impl/get-popular.query';
 import { GetTopRatedQuery } from '../queries/impl/get-topRated.query';
 
 @Controller('movies')
@@ -56,6 +57,11 @@ export class MoviesController {
   @Get('/latest')
   getLatest(@Query('page') page: number) {
     return this.queryBus.execute(new GetLatestQuery(+page));
+  }
+
+  @Get('/popular')
+  getPopular(@Query('page') page: number) {
+    return this.queryBus.execute(new GetPopularQuery(+page));
   }
 
   @Get('/:id')

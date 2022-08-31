@@ -78,7 +78,7 @@ export class MoviesRepository {
     );
   }
 
-  async getTopRated(page: number) {
+  async getTopRated(page = 1) {
     return await this.model
       .find()
       .sort({ averageUserRating: -1 })
@@ -86,10 +86,18 @@ export class MoviesRepository {
       .limit(12);
   }
 
-  async getLatest(page: number) {
+  async getLatest(page = 1) {
     return await this.model
       .find()
       .sort({ released: -1 })
+      .skip((page - 1) * 12)
+      .limit(12);
+  }
+
+  async getPopular(page = 1) {
+    return await this.model
+      .find()
+      .sort({ views: -1 })
       .skip((page - 1) * 12)
       .limit(12);
   }

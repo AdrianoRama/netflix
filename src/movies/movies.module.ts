@@ -17,6 +17,7 @@ import { Movie, MovieSchema } from './models/movie.entity';
 import { GetAllQueryHandler } from './queries/handlers/get-all-query.handler';
 import { GetLatestQueryHandler } from './queries/handlers/get-latest-query.handler';
 import { GetOneQueryHandler } from './queries/handlers/get-one-query.handler';
+import { GetPopularQueryHandler } from './queries/handlers/get-popular-query.handler';
 import { GetTopRatedQueryHandler } from './queries/handlers/get-topRated-query.handler';
 import { MoviesRepository } from './repositories/movies.repository';
 
@@ -43,6 +44,7 @@ import { MoviesRepository } from './repositories/movies.repository';
     GetLatestQueryHandler,
     UpdateViewsCommandHandler,
     WatchMovieEventHandler,
+    GetPopularQueryHandler,
   ],
 })
 export class MoviesModule {}
